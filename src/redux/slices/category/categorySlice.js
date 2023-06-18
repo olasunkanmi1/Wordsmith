@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import baseUrl from "../../../utils/baseURL";
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -58,7 +57,7 @@ export const fetchCategoriesAction = createAsyncThunk(
     };
     //http call
     try {
-      const { data } = await axios.get(`/api/category`, config);
+      const { data } = await axiosInstance.get(`/api/category`, config);
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -83,7 +82,7 @@ export const updateCategoriesAction = createAsyncThunk(
     };
     //http call
     try {
-      const { data } = await axios.put(
+      const { data } = await axiosInstance.put(
         `/api/category/${category?.id}`,
         { title: category?.title },
         config
@@ -114,7 +113,7 @@ export const deleteCategoriesAction = createAsyncThunk(
     };
     //http call
     try {
-      const { data } = await axios.delete(
+      const { data } = await axiosInstance.delete(
         `/api/category/${id}`,
         config
       );
@@ -144,7 +143,7 @@ export const fetchCategoryAction = createAsyncThunk(
     };
     //http call
     try {
-      const { data } = await axios.get(`/api/category/${id}`, config);
+      const { data } = await axiosInstance.get(`/api/category/${id}`, config);
       return data;
     } catch (error) {
       if (!error?.response) {

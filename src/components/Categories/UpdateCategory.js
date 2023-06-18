@@ -16,7 +16,7 @@ const formSchema = Yup.object({
 });
 
 const UpdateCategory = ({
-  computedMatch: {
+  match: {
     params: { id },
   },
 }) => {
