@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-// import { createCategoryAction } from "../../redux/slices/category/categorySlice";
+import { createCategoryAction } from "../../redux/slices/category/categorySlice";
 
 //Form schema
 const formSchema = Yup.object({
@@ -19,7 +19,7 @@ const AddNewCategory = () => {
     },
     onSubmit: values => {
       //dispath the action
-      // dispatch(createCategoryAction(values));
+      dispatch(createCategoryAction(values));
     },
     validationSchema: formSchema,
   });
@@ -27,9 +27,9 @@ const AddNewCategory = () => {
   //get data from store
   const state = useSelector(state => state?.category);
 
-  // const { loading, appErr, serverErr, isCreated } = state;
+  const { loading, appErr, serverErr, isCreated } = state;
   //redirect
-  // if (isCreated) return <Redirect to="/category-list" />;
+  if (isCreated) return <Redirect to="/category-list" />;
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -44,11 +44,11 @@ const AddNewCategory = () => {
             </p>
             {/* Display err */}
             <div>
-              {/* {appErr || serverErr ? (
+              {appErr || serverErr ? (
                 <h2 className="text-red-500 text-center text-lg">
                   {serverErr} {appErr}
                 </h2>
-              ) : null} */}
+              ) : null}
             </div>
           </p>
         </div>
@@ -79,7 +79,7 @@ const AddNewCategory = () => {
           <div>
             <div>
               {/* Submit */}
-              {/* {loading ? (
+              {loading ? (
                 <button
                   disabled
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 "
@@ -105,7 +105,7 @@ const AddNewCategory = () => {
                   </span>
                   Add new Category
                 </button>
-              )} */}
+              )}
             </div>
           </div>
         </form>

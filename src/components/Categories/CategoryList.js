@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { PencilAltIcon } from "@heroicons/react/outline";
 import { fetchCategoriesAction } from "../../redux/slices/category/categorySlice";
 import DateFormatter from "../../utils/DateFormatter";
-import LoadingComponent from "../../utils/LoadingComponent";
+// import LoadingComponent from "../../utils/LoadingComponent";
 
 const CategoryList = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,8 @@ const CategoryList = () => {
     <>
       {loading ? (
         <>
-          <LoadingComponent />
+        <h1> Loading... </h1>
+          {/* <LoadingComponent /> */}
         </>
       ) : appErr || serverErr ? (
         <h2 className="text-center text-3xl text-red-600">
