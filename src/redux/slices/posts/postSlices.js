@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import baseUrl from "../../../utils/baseURL";
-//Create Post action
 
+const axiosInstance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL
+});
+
+//Create Post action
 //action to redirect
 const resetPost = createAction("category/reset");
 const resetPostEdit = createAction("post/reset");
@@ -29,8 +32,8 @@ export const createpostAction = createAsyncThunk(
       formData.append("category", post?.category);
       formData.append("image", post?.image);
 
-      const { data } = await axios.post(
-        `${baseUrl}/api/posts`,
+      const { data } = await axiosInstance.post(
+        `/api/posts`,
         formData,
         config
       );
@@ -59,8 +62,8 @@ export const updatePostAction = createAsyncThunk(
     };
     try {
       //http call
-      const { data } = await axios.put(
-        `${baseUrl}/api/posts/${post?.id}`,
+      const { data } = await axiosInstance.put(
+        `/api/posts/${post?.id}`,
         post,
         config
       );
@@ -88,8 +91,8 @@ export const deletePostAction = createAsyncThunk(
     };
     try {
       //http call
-      const { data } = await axios.delete(
-        `${baseUrl}/api/posts/${postId}`,
+      const { data } = await axiosInstance.delete(
+        `/api/posts/${postId}`,
         config
       );
       //dispatch
@@ -107,8 +110,8 @@ export const fetchPostsAction = createAsyncThunk(
   "post/list",
   async (category, { rejectWithValue, getState, dispatch }) => {
     try {
-      const { data } = await axios.get(
-        `${baseUrl}/api/posts?category=${category}`
+      const { data } = await axiosInstance.get(
+        `/api/posts?category=${category}`
       );
       return data;
     } catch (error) {
@@ -122,7 +125,7 @@ export const fetchPostDetailsAction = createAsyncThunk(
   "post/detail",
   async (id, { rejectWithValue, getState, dispatch }) => {
     try {
-      const { data } = await axios.get(`${baseUrl}/api/posts/${id}`);
+      const { data } = await axiosInstance.get(`/api/posts/${id}`);
       return data;
     } catch (error) {
       if (!error?.response) throw error;
@@ -144,8 +147,8 @@ export const toggleAddLikesToPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await axios.put(
-        `http://localhost:5000/api/posts/likes`,
+      const { data } = await axiosInstance.put(
+        `/api/posts/likes`,
         { postId },
         config
       );
@@ -171,8 +174,8 @@ export const toggleAddDisLikesToPost = createAsyncThunk(
       },
     };
     try {
-      const { data } = await axios.put(
-        `http://localhost:5000/api/posts/dislikes`,
+      const { data } = await axiosInstance.put(
+        `/api/posts/dislikes`,
         { postId },
         config
       );

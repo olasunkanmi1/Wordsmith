@@ -23,11 +23,12 @@ const PostDetails = ({
   const { postDetails, loading, appErr, serverErr, isDeleted } = post;
 
   //comment
-  const comment = useSelector(state => state.comment);
-  const { commentCreated, commentDeleted } = comment;
+  // const comment = useSelector(state => state.comment);
+  // const { commentCreated, commentDeleted } = comment;
   useEffect(() => {
     dispatch(fetchPostDetailsAction(id));
-  }, [id, dispatch, commentCreated, commentDeleted]);
+  }, [id, dispatch]);
+  // }, [id, dispatch, commentCreated, commentDeleted]);
 
   //Get login user
   const user = useSelector(state => state.users);
@@ -41,7 +42,8 @@ const PostDetails = ({
     <>
       {loading ? (
         <div className="h-screen">
-          <LoadingComponent />
+          <h1> Loading... </h1>
+          {/* <LoadingComponent /> */}
         </div>
       ) : appErr || serverErr ? (
         <h1 className="h-screen text-red-400 text-xl">

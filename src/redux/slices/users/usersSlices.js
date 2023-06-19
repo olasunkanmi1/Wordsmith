@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, createAction } from "@reduxjs/toolkit";
 import axios from 'axios';
-import baseUrl from "../../../utils/baseURL";
 
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL

@@ -26,7 +26,7 @@ const Container = styled.div`
   border-style: dashed;
   background-color: #fafafa;
   color: #bdbdbd;
-border-color:'red'
+  border-color: 'red';
   transition: border 0.24s ease-in-out;
 `;
 

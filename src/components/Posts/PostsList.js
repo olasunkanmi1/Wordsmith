@@ -67,7 +67,8 @@ export default function PostsList() {
                   </h4>
                   <ul>
                     {catLoading ? (
-                      <LoadingComponent />
+                      <h1> Loading... </h1>
+                      // <LoadingComponent />
                     ) : catAppErr || catServerErr ? (
                       <h1>
                         {catServerErr} {catAppErr}
