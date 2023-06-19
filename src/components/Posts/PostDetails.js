@@ -8,8 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/DateFormatter";
 import LoadingComponent from "../../utils/LoadingComponent";
-// import AddComment from "../Comments/AddComment";
-// import CommentsList from "../Comments/CommentsList";
+import AddComment from "../Comments/AddComment";
+import CommentsList from "../Comments/CommentsList";
 
 const PostDetails = ({
   match: {
@@ -23,12 +23,11 @@ const PostDetails = ({
   const { postDetails, loading, appErr, serverErr, isDeleted } = post;
 
   //comment
-  // const comment = useSelector(state => state.comment);
-  // const { commentCreated, commentDeleted } = comment;
+  const comment = useSelector(state => state.comment);
+  const { commentCreated, commentDeleted } = comment;
   useEffect(() => {
     dispatch(fetchPostDetailsAction(id));
-  }, [id, dispatch]);
-  // }, [id, dispatch, commentCreated, commentDeleted]);
+  }, [id, dispatch, commentCreated, commentDeleted]);
 
   //Get login user
   const user = useSelector(state => state.users);
@@ -110,10 +109,10 @@ const PostDetails = ({
             </div>
           </div>
           {/* Add comment Form component here */}
-          {/* {userAuth ? <AddComment postId={id} /> : null} */}
+          {userAuth ? <AddComment postId={id} /> : null}
           <div className="flex justify-center  items-center">
             {/* <CommentsList comments={post?.comments} postId={post?._id} /> */}
-            {/* <CommentsList comments={postDetails?.comments} /> */}
+            <CommentsList comments={postDetails?.comments} />
           </div>
         </section>
       )}
